@@ -1,34 +1,50 @@
-import logo from './logo.svg';
+
 import './App.css';
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 
 export default function App() {
-  const [random, setRandom] = useState(Math.random());
+
+  const [marker, setMarker] = useState();
 
   mapboxgl.accessToken = "pk.eyJ1IjoicmFyYW0iLCJhIjoiY2t2bGRtNWN6M2ZtbzJvcGd2ZDV5eTBmMiJ9.H3XDB5QalWUljh2wEWg-iA";
 
-  useLayoutEffect(() => {
-      const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
-      center: [37.61192, 55.76199],
+  useEffect(() => {
+    const map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/dark-v10",
+      center: [37.610641, 55.761994],
       zoom: 10
-    })
-      return () => {
+    });
 
-      }
-  }, [])
+    const marker = new mapboxgl.Marker()
+    
+    setMarker(marker.setLngLat([37.610641, 55.761994])
+    .addTo(map))
+  }, []);
+
+  function handleStoreChange(){
+    setMarker(marker.setLngLat(stores))
+  }
+
+  const stores = {
+    km20: [37.610641, 55.761994],
+    belief: [37.601152, 55.733396],
+    brandshop: [37.616812, 55.767839]
+  };
 
   return (
     <>
-      <button id="rerender" onClick={() => setRandom(Math.random())}>
-        Ререндер!
-      </button>
+      <div className="map-overlay">
+        <h3>Выберите магазин: </h3>
+        <select onChane={handleStoreChange}>
+          <option value="km20">KM20</option>
+          <option value="belief">BELIEF</option>
+          <option value="brandshop">BRANDSHOP</option>
+        </select>
+      </div>
       <div id="map"></div>
     </>
   );
 }
-
-render(<App />, document.querySelector("#root"));
