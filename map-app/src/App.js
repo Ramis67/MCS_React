@@ -1,16 +1,15 @@
 
 import './App.css';
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
+import React, { useLayoutEffect, useState } from "react";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 
 export default function App() {
 
-  const [marker, setMarker] = useState();
+  const [marker, setMarker] = useState('');
 
   mapboxgl.accessToken = "pk.eyJ1IjoicmFyYW0iLCJhIjoiY2t2bGRtNWN6M2ZtbzJvcGd2ZDV5eTBmMiJ9.H3XDB5QalWUljh2wEWg-iA";
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/dark-v10",
@@ -19,13 +18,13 @@ export default function App() {
     });
 
     const marker = new mapboxgl.Marker()
-    
-    setMarker(marker.setLngLat([37.610641, 55.761994])
-    .addTo(map))
+    marker.setLngLat([37.610641, 55.761994])
+    marker.addTo(map)
+    setMarker(marker)
   }, []);
 
-  function handleStoreChange(){
-    setMarker(marker.setLngLat(stores))
+  function handleStoreChange(e){
+    marker.setLngLat(stores[e.target.value]);
   }
 
   const stores = {
@@ -38,7 +37,7 @@ export default function App() {
     <>
       <div className="map-overlay">
         <h3>Выберите магазин: </h3>
-        <select onChane={handleStoreChange}>
+        <select onChange={handleStoreChange}>
           <option value="km20">KM20</option>
           <option value="belief">BELIEF</option>
           <option value="brandshop">BRANDSHOP</option>
