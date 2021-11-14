@@ -1,5 +1,4 @@
 
-import './App.css';
 import React, { useLayoutEffect, useState } from "react";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 
