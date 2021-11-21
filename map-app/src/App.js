@@ -6,7 +6,7 @@ export default function App() {
 
   const [marker, setMarker] = useState('');
 
-  mapboxgl.accessToken = "pk.eyJ1IjoicmFyYW0iLCJhIjoiY2t2bGRtNWN6M2ZtbzJvcGd2ZDV5eTBmMiJ9.H3XDB5QalWUljh2wEWg-iA";
+  mapboxgl.accessToken = "pk.eyJ1IjoicmFyYW0iLCJhIjoiY2t3OTloejJ1MWZvNDJucmgweTZnNnAzbyJ9.hk8C8_INwB_zrgaMErUowg";
 
   useLayoutEffect(() => {
     const map = new mapboxgl.Map({
