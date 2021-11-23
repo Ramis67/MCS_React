@@ -4,7 +4,9 @@ import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 
 export default function App() {
 
+  // const [lngLat, setLngLat] = useState([]);
   const [marker, setMarker] = useState('');
+  const [map, setMap] = useState('');
 
   mapboxgl.accessToken = "pk.eyJ1IjoicmFyYW0iLCJhIjoiY2t3OTloejJ1MWZvNDJucmgweTZnNnAzbyJ9.hk8C8_INwB_zrgaMErUowg";
 
@@ -15,10 +17,11 @@ export default function App() {
       center: [37.610641, 55.761994],
       zoom: 10
     });
+    setMap(map)
 
     const marker = new mapboxgl.Marker()
-    marker.setLngLat([37.610641, 55.761994])
-    marker.addTo(map)
+    .setLngLat([37.610641, 55.761994])
+    .addTo(map)
     setMarker(marker)
   }, []);
 
